@@ -1,0 +1,38 @@
+# Host File Manager
+# 
+# This is used to help you manage and switch multiple host files, 
+# around in a simple quick manner
+# 
+# @author James Solomon <solomonjames@gmail.com>
+
+############ Start Bash Host File Manager
+
+function h {
+	cat ~/.hfm/main > ~/.hfm/hostsfile
+	
+	for var in "$@"
+	do
+		if [ $var != "default" ]
+			then
+				cat ~/.hfm/files/$var >> ~/.hfm/hostsfile
+		fi
+	done
+}
+
+function hl {
+	ls ~/.hfm/files
+}
+
+# completion command for h
+function _hcomp {
+	local curw
+	COMPREPLY=()
+	curw=${COMP_WORDS[COMP_CWORD]}
+	COMPREPLY=($(compgen -W '`hl`' -- $curw))
+	return 0
+}
+
+# bind completion command for h to _hcomp
+complete -F _hcomp h
+
+############ End Bash Host File Manager

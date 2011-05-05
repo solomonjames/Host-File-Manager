@@ -1,0 +1,64 @@
+# Host File Manager
+# 
+# This is used to help you manage and switch multiple host files, 
+# around in a simple quick manner
+# 
+# @author James Solomon <solomonjames@gmail.com>
+
+#####################
+### Setup
+#####################
+
+1. Copy the code in "bash_hfm" into your ".profile", ".bash_profile", 
+   etc file in your home directory.
+
+   Mac:
+       $ cat bash_hfm >> ~/.profile
+
+   Linux
+       $ cat bash_hfm >> ~/.bash_profile
+
+2. Reload your terminal window, either by running "source .profile" or just
+   closing and opening it up again
+
+3. Run the following command to create the needed directories and do all the setup
+
+   $ mkdir ~/.hfm && cd ~/.hfm && mkdir files && touch main && cat /etc/hosts > ~/.hfm/main && sudo rm /etc/hosts && sudo ln -s ~/.hfm/hostsfile /etc/hosts && h default
+
+   -- This will make the hfm directory that will store the file, 
+      "hostsfile", which will then be symlinked to from /etc/hosts.
+
+4. You are now all setup
+
+#####################
+### Explanation
+#####################
+
+~/.hfm/main : This file is used to be here as a static file that can hold 
+              host file entries you would wish to always be present, 
+              i.e. 127.0.0.1 localhost
+
+~/.hfm/files : This is where all your different host files will be held
+
+~/.hfm/hostsfile : This is the current host file your system is linking to
+
+#####################
+### Usage
+#####################
+
+Add a new host file:
+    $ cd ~/.hfm/files
+    $ vim google
+        -- Add your entries
+    Done!
+
+Load a host file:
+    $ h google
+
+Load X number of host files:
+    $ h google test yahoo local
+    -- All of these files must exist, and each will just be
+       appended to the end of the other
+
+List your host files:
+    $ hl
