@@ -62,3 +62,7 @@ Load X number of host files:
 
 List your host files:
     $ hl
+
+Reset to default:
+    $ h default
+    -- This actually just loads whatever is in the "main" file, and thats it
